@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  website: MyString
+  crunchbase_url: MyString
+  linkedin_url: MyString
+  glassdoor_url: MyString
+  twitter_username: MyString
+  number_of_employees: MyString
+  founded_year: MyString
+  overview: MyText
+
+two:
+  name: MyString
+  website: MyString
+  crunchbase_url: MyString
+  linkedin_url: MyString
+  glassdoor_url: MyString
+  twitter_username: MyString
+  number_of_employees: MyString
+  founded_year: MyString
+  overview: MyText
