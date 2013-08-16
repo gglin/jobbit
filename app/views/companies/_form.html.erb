@@ -1,58 +1,14 @@
-<%= form_for @company, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :website, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :website, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :crunchbase_url, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :crunchbase_url, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :linkedin_url, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :linkedin_url, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :glassdoor_url, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :glassdoor_url, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :twitter_username, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :twitter_username, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :number_of_employees, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :number_of_employees, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :founded_year, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :founded_year, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :overview, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :overview, :class => 'text_area' %>
-    </div>
-  </div>
+<%= simple_form_for @company, :html => { :class => 'form-horizontal' } do |f| %>
+  
+  <%= f.input :name  %>
+  <%= f.input :website  %>
+  <%= f.input :crunchbase_url  %>
+  <%= f.input :linkedin_url  %>
+  <%= f.input :glassdoor_url  %>
+  <%= f.input :twitter_username  %>
+  <%= f.input :number_of_employees  %>
+  <%= f.input :founded_year  %>
+  <%= f.input :overview  %>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
