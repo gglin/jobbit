@@ -1,4 +1,4 @@
-# source 'https://rubygems.org'
+source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
@@ -13,6 +13,7 @@ gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'less-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
@@ -23,9 +24,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'less-rails'
-
-gem 'crunchbase'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -41,3 +39,17 @@ gem 'crunchbase'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'simple_form'
+gem 'figaro'
+# gem 'devise'
+
+gem 'omniauth'
+
+gem 'linkedin'
+gem 'omniauth-linkedin'
+
+gem 'twitter'
+gem 'omniauth-twitter'
+
+gem 'crunchbase'
