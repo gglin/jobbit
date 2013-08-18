@@ -44,6 +44,12 @@ gem 'simple_form'
 gem 'devise'
 gem 'figaro'
 
-gem 'omniauth-linkedin-oauth2'
+gem 'omniauth'
+
+gem 'linkedin'
+gem 'omniauth-linkedin'
+
+gem 'twitter'
+gem 'omniauth-twitter'
 
 gem 'crunchbase'
