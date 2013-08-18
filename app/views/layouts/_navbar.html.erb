@@ -18,7 +18,7 @@
       <div class="nav-collapse">
         <ul class="nav pull-right">
           <% if current_user %>
-            <p> <%= current_user.email %> </p>
+            <li><p><strong><%= current_user.email %></strong></p></li>
             <li><%= link_to "Log Out", logout_path %> </li>
           <% else %>
             <li><%= link_to "Sign up", signup_path %> </li>
