@@ -42,5 +42,8 @@ gem 'jquery-rails'
 
 gem 'simple_form'
 gem 'devise'
+gem 'figaro'
+
+gem 'omniauth-linkedin-oauth2'
 
 gem 'crunchbase'
