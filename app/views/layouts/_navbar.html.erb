@@ -7,12 +7,28 @@
         <span class="icon-bar"></span>
       </a>
       <a class="brand" href="/">JobbIT</a>
+
       <div class="nav-collapse">
         <ul class="nav">
           <li><%= link_to "Companies", companies_path %></li>
           <li><%= link_to "People" %></li>
         </ul>
       </div>
+
+      <div class="nav-collapse">
+        <ul class="nav pull-right">
+          <% if current_user %>
+            <p> <%= current_user.email %> </p>
+            <li><%= link_to "Log Out", logout_path %> </li>
+          <% else %>
+            <li><%= link_to "Sign up", signup_path %> </li>
+            <li><%= link_to "Login", login_path %>  </li>
+            <!-- <li><%# link_to "<i class='icon-linkedin-sign icon-large'></i>".html_safe, user_omniauth_authorize_path(:linkedin) %>  </li>
+            <li><%# link_to "<i class='icon-twitter-sign icon-large'></i>".html_safe, user_omniauth_authorize_path(:twitter) %>  </li> -->
+          <% end %>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>

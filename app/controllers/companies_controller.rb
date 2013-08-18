@@ -1,4 +1,6 @@
 class CompaniesController < ApplicationController
+  before_filter :authorize, only: [:edit, :update]
+  
   # GET /companies
   # GET /companies.json
   def index
