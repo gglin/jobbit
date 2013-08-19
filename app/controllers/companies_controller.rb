@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_filter :authorize, only: [:edit, :update]
+  # before_filter :authorize, only: [:edit, :update]
   
   # GET /companies
   # GET /companies.json
@@ -80,6 +80,33 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to companies_url }
       format.json { head :no_content }
+    end
+  end
+
+  def show_crunchbase
+    @company = Company.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @company }
+    end
+  end
+
+  def show_linkedin
+    @company = Company.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @company }
+    end
+  end
+
+  def show_glassdoor
+    @company = Company.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @company }
     end
   end
 end

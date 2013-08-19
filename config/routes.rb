@@ -12,6 +12,10 @@ Jobbit::Application.routes.draw do
   resources :sessions
 
   resources :companies
+  get 'companies/:id/crunchbase', to: 'companies#show_crunchbase', as: 'company_crunchbase'
+  get 'companies/:id/linkedin'  , to: 'companies#show_linkedin'  , as: 'company_linkedin'
+  get 'companies/:id/glassdoor' , to: 'companies#show_glassdoor' , as: 'company_glassdoor'
+
   resources :employees
 
   root :to => 'companies#index'
