@@ -1,8 +1,5 @@
 Jobbit::Application.routes.draw do
 
-  resources :employees
-
-
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
@@ -15,6 +12,7 @@ Jobbit::Application.routes.draw do
   resources :sessions
 
   resources :companies
+  resources :employees
 
   root :to => 'companies#index'
 

@@ -48,7 +48,7 @@ gem 'simple_form'
 gem 'figaro'
 # gem 'devise'
  
-gem 'fastercsv'
+# gem 'fastercsv'
 
 
 gem 'omniauth'

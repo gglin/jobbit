@@ -6,7 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'csv'
+
 filename = "db/sciencefair_attendees.csv"
+
+Company.delete_all
+Employee.delete_all
+Employment.delete_all
 
 CSV.foreach(filename) do |row|
   unless row[0] == "First Name"
@@ -19,13 +25,17 @@ CSV.foreach(filename) do |row|
     # employee.save
 
     company = Company.find_or_create_by_name(company_name)
-    company.save
+    puts company.name
 
-    employee = company.employees.build(first_name: first_name, last_name: last_name)
-    employee.save
+    employee = company.employees.create(first_name: first_name, last_name: last_name)
+    puts "#{employee.first_name} #{employee.last_name}"
+    
+    if job_title
+      employment = Employment.where(employee_id: employee.id, company_id: company.id).first
+      employment.title = job_title
+      employment.save
+    end
 
-    employment = Employment.where(employee_id: employee.id, company_id: company.id).take!
-    employment.title = job_title
-    employment.save
+    puts
   end
 end
