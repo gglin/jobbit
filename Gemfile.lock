@@ -49,6 +49,7 @@ GEM
       multi_json (~> 1.0)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
+    fastercsv (1.5.5)
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
@@ -160,6 +161,7 @@ DEPENDENCIES
   better_errors
   coffee-rails (~> 3.2.1)
   crunchbase
+  fastercsv
   figaro
   jquery-rails
   less-rails

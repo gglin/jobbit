@@ -47,6 +47,9 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'simple_form'
 gem 'figaro'
 # gem 'devise'
+ 
+gem 'fastercsv'
+
 
 gem 'omniauth'
 
@@ -56,4 +59,8 @@ gem 'omniauth-linkedin'
 gem 'twitter'
 gem 'omniauth-twitter'
 
+
 gem 'crunchbase'
+
+
+

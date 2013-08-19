@@ -1,17 +1,15 @@
 <%= simple_form_for @company, :html => { :class => 'form-horizontal' } do |f| %>
-  
-  <%= f.input :name  %>
-  <%= f.input :website  %>
-  <%= f.input :crunchbase_url  %>
-  <%= f.input :linkedin_url  %>
-  <%= f.input :glassdoor_url  %>
-  <%= f.input :twitter_username  %>
-  <%= f.input :number_of_employees  %>
-  <%= f.input :founded_year  %>
-  <%= f.input :overview  %>
-
+  <%= f.input :name %>
+  <%= f.input :website %>
+  <%= f.input :crunchbase_url %>
+  <%= f.input :linkedin_url %>
+  <%= f.input :glassdoor_url %>
+  <%= f.input :twitter_username %>
+  <%= f.input :number_of_employees %>
+  <%= f.input :founded_year %>
+  <%= f.input :overview %>
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 companies_path, :class => 'btn' %>
   </div>
