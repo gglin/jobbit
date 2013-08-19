@@ -6,14 +6,14 @@
   <thead>
     <tr>
       <!-- <th><%# model_class.human_attribute_name(:id) %></th> -->
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:website) %></th>
-      <th><%= model_class.human_attribute_name(:crunchbase_url) %></th>
-      <th><%= model_class.human_attribute_name(:linkedin_url) %></th>
-      <th><%= model_class.human_attribute_name(:glassdoor_url) %></th>
-      <th><%= "Twitter Account" %></th>
-      <th><%= "# of Employees" %></th>
-      <th><%= model_class.human_attribute_name(:founded_year) %></th>
+      <th data-sort="string"><%= model_class.human_attribute_name(:name) %></th>
+      <th data-sort="string"><%= model_class.human_attribute_name(:website) %></th>
+      <th data-sort="string"><%= model_class.human_attribute_name(:crunchbase_url) %></th>
+      <th data-sort="string"><%= model_class.human_attribute_name(:linkedin_url) %></th>
+      <th data-sort="string"><%= model_class.human_attribute_name(:glassdoor_url) %></th>
+      <th data-sort="string"><%= "Twitter Account" %></th>
+      <th data-sort="string"><%= "# of Employees" %></th>
+      <th data-sort="string"><%= model_class.human_attribute_name(:founded_year) %></th>
       <!-- <th><%# model_class.human_attribute_name(:overview) %></th> -->
       <!-- <th><%# model_class.human_attribute_name(:created_at) %></th> -->
       <th><%=t '.actions', :default => t("helpers.actions") %></th>

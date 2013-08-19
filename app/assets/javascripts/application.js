@@ -13,4 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//
+//= require ../../../vendor/assets/javascripts/stupidtable.min
 //= require_tree .

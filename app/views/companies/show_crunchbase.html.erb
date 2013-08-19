@@ -31,9 +31,10 @@
     <td><strong>Funding Rounds</strong></td>
     <td>
       <% @crunchbase_company.funding_rounds.each do |round| %>
-        <p><%= link_to "Round: #{round['round_code']}", round['source_url'] %></p>
-        <%= round["raised_amount"].to_i / 1e6 %>M <%= round["raised_currency_code"] %>
-        <br><br>
+        <p>
+          <%= link_to "Round: #{round['round_code']}", round['source_url'] %><br>
+          <%= round["raised_amount"].to_i / 1e6 %>M <%= round["raised_currency_code"] %>
+        </p>
       <% end %>
     </td>
   </tr>

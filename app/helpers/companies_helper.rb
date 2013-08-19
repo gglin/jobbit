@@ -9,7 +9,7 @@ module CompaniesHelper
       # :twitter_username,
       # :category_code,
       :number_of_employees,
-      :deadpooled_url,
+      # :deadpooled_url,
       :email_address,
       :phone_number,
       :description,
