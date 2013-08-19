@@ -14,6 +14,7 @@
       <th data-sort="string"><%= "Twitter Account" %></th>
       <th data-sort="string"><%= "# of Employees" %></th>
       <th data-sort="string"><%= model_class.human_attribute_name(:founded_year) %></th>
+      <th data-sort="string"><%= "Employees at Fair" %></th>
       <!-- <th><%# model_class.human_attribute_name(:overview) %></th> -->
       <!-- <th><%# model_class.human_attribute_name(:created_at) %></th> -->
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -31,6 +32,14 @@
         <td><%= company.twitter_username %></td>
         <td><%= company.number_of_employees %></td>
         <td><%= company.founded_year %></td>
+        <td>
+          <% if company.employees.size > 1 %>
+            <%= company.employees.size %>
+          <% else %>
+            <% employee = company.employees.first %>
+            <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee) %>
+          <% end %>
+        </td>
         <!-- <td><%# company.overview %></td> -->
         <!-- <td><%#l company.created_at %></td> -->
         <td>

@@ -6,14 +6,16 @@
 <%# @crunchbase_company.methods - Object.methods %>
 
 <table class="table">
+  <% if @crunchbase_company.respond_to?("twitter_username") %>
   <tr>
     <td><strong>Twitter</strong></td>
     <td><%= link_to "@#{@crunchbase_company.twitter_username}", "http://www.twitter.com/#{@crunchbase_company.twitter_username}" %></td>
   </tr>
+  <% end %>
 
   <% crunchbase_attributes.each do |attribute| %>
-    <% attribute_value = @crunchbase_company.send(attribute.to_s) %>
-    <% if attribute_value %>
+    <% if @crunchbase_company.respond_to?(attribute.to_s) && @crunchbase_company.send(attribute.to_s) %>
+      <% attribute_value = @crunchbase_company.send(attribute.to_s) %>
       <tr>
         <td><strong><%= model_class.human_attribute_name(attribute) %>:</strong></td>
         <td>
@@ -26,21 +28,43 @@
       </tr>
     <% end %>
   <% end %>
-
+  
+  <% if @crunchbase_company.respond_to?("funding_rounds") %>
   <tr>
     <td><strong>Funding Rounds</strong></td>
     <td>
+      <%# @crunchbase_company.funding_rounds %>
       <% @crunchbase_company.funding_rounds.each do |round| %>
         <p>
-          <%= link_to "Round: #{round['round_code']}", round['source_url'] %><br>
-          <%= round["raised_amount"].to_i / 1e6 %>M <%= round["raised_currency_code"] %>
+          <% round_name = round['round_code'] == "seed"  ?  round['round_code'].capitalize  :  "Series " + round['round_code'].capitalize %>
+          <% amount = round["raised_amount"].to_i > 1e6  ?  "#{round["raised_amount"].to_i / 1e6}M"  :  "#{round["raised_amount"].to_i / 1e3}K" %>
+          <strong><%= link_to "#{round_name}, #{round['funded_month']}/#{round['funded_year']} ", round['source_url'] %></strong><br>
+          <strong><%= amount %> <%= round["raised_currency_code"] %></strong>
+          <ul>
+          <% round["investments"].each do |investment| %>
+            <li>
+              <% if investment["company"] %>
+                <% name = investment["company"]["name"] %>
+              <% elsif investment["financial_org"] %>
+                <% name = investment["financial_org"]["name"] %>
+              <% elsif investment["person"] %>
+                <% name = "#{investment["person"]["first_name"]} #{investment["person"]["last_name"]}" %>
+              <% end %>
+              <%= link_to name, "http://www.google.com/search?q=#{name.gsub(' ','+')}" %>
+            </li>
+          <% end %>
+          </ul>
         </p>
       <% end %>
     </td>
   </tr>
-
+  <% end %>
+  
+  <% if @crunchbase_company.respond_to?("overview") %>
   <tr>
     <td><strong>Overview</strong></td>
     <td><%= simple_format @crunchbase_company.overview %></td>
   </tr>
+  <% end %>
 <table>
+

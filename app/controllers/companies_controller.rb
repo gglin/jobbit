@@ -88,7 +88,12 @@ class CompaniesController < ApplicationController
     @name    = @company.name
 
     enter_crunchbase_keys
-    @crunchbase_company = Crunchbase::Company.find(@name)
+    begin 
+      @crunchbase_company = Crunchbase::Company.find(@name)
+      @company_found = true
+    rescue
+      @crunchbase_company = Crunchbase::Search.find(@name).first
+    end
 
     respond_to do |format|
       format.html # show.html.erb
