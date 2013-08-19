@@ -1,6 +1,7 @@
 <%- model_class = Company -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <%= link_to "Update All from Crunchbase", "/", :class => 'btn btn-success btn-mini' %>
 </div>
 <table class="table table-striped table-wide">
   <thead>
@@ -14,6 +15,8 @@
       <th data-sort="string"><%= "Twitter Account" %></th>
       <th data-sort="string"><%= "# of Employees" %></th>
       <th data-sort="string"><%= model_class.human_attribute_name(:founded_year) %></th>
+      <th data-sort="string"><%= "Total Money Raised" %></th>
+      <th data-sort="string"><%= "# Funding Rounds" %></th>
       <th data-sort="string"><%= "Employees at Fair" %></th>
       <!-- <th><%# model_class.human_attribute_name(:overview) %></th> -->
       <!-- <th><%# model_class.human_attribute_name(:created_at) %></th> -->
@@ -25,13 +28,15 @@
       <tr>
         <!-- <td><%# link_to company.id, company_path(company) %></td> -->
         <td><%= link_to company.name, company_path(company) %></td>
-        <td><%= company.website %></td>
-        <td><%= company.crunchbase_url %></td>
-        <td><%= company.linkedin_url %></td>
-        <td><%= company.glassdoor_url %></td>
-        <td><%= company.twitter_username %></td>
+        <td><%= link_to "<i class='icon-external-link-sign icon-large'></i>".html_safe, company.website, target: "_blank"                    if company.website && !company.website.blank? %></td>
+        <td><%= link_to image_tag("/assets/crunchbase_logo.jpeg", size: "16x16"), company.crunchbase_url, target: "_blank"     if company.crunchbase_url && !company.crunchbase_url.blank? %></td>
+        <td><%= link_to "<i class='icon-linkedin-sign icon-large'></i>".html_safe, company.linkedin_url, target: "_blank"      if company.linkedin_url && !company.linkedin_url.blank? %></td>
+        <td><%= link_to image_tag("/assets/glassdoor_logo.jpeg", size: "16x16"), company.glassdoor_url, target: "_blank"       if company.glassdoor_url && !company.glassdoor_url.blank? %></td>
+        <td><%= link_to "@#{company.twitter_username}", "http://www.twitter.com/#{company.twitter_username}", target: "_blank" if company.twitter_username && !company.twitter_username.blank? %></td>
         <td><%= company.number_of_employees %></td>
         <td><%= company.founded_year %></td>
+        <td><%= company.total_money_raised %></td>
+        <td><%= company.funding_rounds.scan("<a").size if company.funding_rounds %></td>
         <td>
           <% if company.employees.size > 1 %>
             <%= company.employees.size %>
@@ -43,6 +48,9 @@
         <!-- <td><%# company.overview %></td> -->
         <!-- <td><%#l company.created_at %></td> -->
         <td>
+          <%= link_to image_tag("/assets/crunchbase_logo.jpeg", size: "16x16"),  company_crunchbase_path(company), class: "inline" %>
+          <%= link_to "<i class='icon-linkedin-sign icon-large'></i>".html_safe, company_linkedin_path(company),   class: "inline" %>
+          <%= link_to image_tag("/assets/glassdoor_logo.jpeg", size: "16x16"),   company_glassdoor_path(company),  class: "inline" %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_company_path(company), :class => 'btn btn-mini inline' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),

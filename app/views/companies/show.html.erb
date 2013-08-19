@@ -3,26 +3,60 @@
   <h3><%=t '.title', :default => @company.name %></h3>
 </div>
 
-<dl class="dl-horizontal">
-  <!-- <dt><strong><%# model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%# @company.name %></dd> -->
-  <dt><strong><%= model_class.human_attribute_name(:website) %>:</strong></dt>
-  <dd><%= @company.website %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:crunchbase_url) %>:</strong></dt>
-  <dd><%= @company.crunchbase_url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:linkedin_url) %>:</strong></dt>
-  <dd><%= @company.linkedin_url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:glassdoor_url) %>:</strong></dt>
-  <dd><%= @company.glassdoor_url %></dd>
-  <dt><strong><%= "Twitter Account" %>:</strong></dt>
-  <dd><%= @company.twitter_username %></dd>
-  <dt><strong><%= "# of Employees" %>:</strong></dt>
-  <dd><%= @company.number_of_employees %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:founded_year) %>:</strong></dt>
-  <dd><%= @company.founded_year %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:overview) %>:</strong></dt>
-  <dd><%= @company.overview %></dd>
-</dl>
+<table class="table table-show">
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:website) %>:</strong></td>
+    <td><%= auto_link(@company.website, :all, :target => "_blank") %></td>
+  </tr>
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:crunchbase_url) %>:</strong></td>
+    <td><%= auto_link(@company.crunchbase_url, :all, :target => "_blank") %></td>
+  </tr>
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:linkedin_url) %>:</strong></td>
+    <td><%= auto_link(@company.linkedin_url, :all, :target => "_blank") %></td>
+  </tr>
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:glassdoor_url) %>:</strong></td>
+    <td><%= auto_link(@company.glassdoor_url, :all, :target => "_blank") %></td>
+  </tr>
+
+  <tr>
+    <td><strong><%= "Twitter Account" %>:</strong></td>
+    <td><%= link_to "@#{@company.twitter_username}", "http://www.twitter.com/#{@company.twitter_username}", :target => "_blank" %></td>
+  </tr>
+  <tr>
+    <td><strong><%= "# of Employees" %>:</strong></td>
+    <td><%= @company.number_of_employees %></td>
+  </tr>
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:founded_year) %>:</strong></td>
+    <td><%= @company.founded_year %></td>
+  </tr>
+
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:total_money_raised) %>:</strong></td>
+    <td><%= @company.total_money_raised %></td>
+  </tr>
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:funding_rounds) %>:</strong></td>
+    <td><%= simple_format @company.funding_rounds %></td>
+  </tr>
+  
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:description) %>:</strong></td>
+    <td><%= @company.description %></td>
+  </tr>
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:overview) %>:</strong></td>
+    <td><%= simple_format @company.overview %></td>
+  </tr>
+
+  <tr>
+    <td><strong><%= "Notes" %>:</strong></td>
+    <td><%= simple_format @company.notes %></td>
+  </tr>
+</table>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

@@ -92,6 +92,7 @@ class CompaniesController < ApplicationController
       @crunchbase_company = Crunchbase::Company.find(@name)
       @company_found = true
     rescue
+      # .select{|x| x.namespace != "person"}
       @crunchbase_company = Crunchbase::Search.find(@name).first
     end
 

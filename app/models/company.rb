@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-  attr_accessible :crunchbase_url, :founded_year, :glassdoor_url, :linkedin_url, :name, :number_of_employees, :overview, :twitter_username, :website
+  attr_accessible :crunchbase_url, :founded_year, :glassdoor_url, :linkedin_url, :name, :number_of_employees, :overview, :twitter_username, :website, :total_money_raised, :funding_rounds, :description
   attr_accessible :employees, :employee_ids
 
   has_many :employments

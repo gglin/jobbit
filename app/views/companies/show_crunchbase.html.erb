@@ -5,24 +5,28 @@
 
 <%# @crunchbase_company.methods - Object.methods %>
 
+<% attributes = {} %>
+<% funding_round_text = "" %>
+
 <table class="table">
   <% if @crunchbase_company.respond_to?("twitter_username") %>
+  <% attributes[:twitter_username] = @crunchbase_company.twitter_username %>
   <tr>
     <td><strong>Twitter</strong></td>
-    <td><%= link_to "@#{@crunchbase_company.twitter_username}", "http://www.twitter.com/#{@crunchbase_company.twitter_username}" %></td>
+    <td><%= link_to "@#{attributes[:twitter_username]}", "http://www.twitter.com/#{attributes[:twitter_username]}" %></td>
   </tr>
   <% end %>
-
+  
   <% crunchbase_attributes.each do |attribute| %>
     <% if @crunchbase_company.respond_to?(attribute.to_s) && @crunchbase_company.send(attribute.to_s) %>
-      <% attribute_value = @crunchbase_company.send(attribute.to_s) %>
+      <% attributes[attribute] = @crunchbase_company.send(attribute.to_s) %>
       <tr>
         <td><strong><%= model_class.human_attribute_name(attribute) %>:</strong></td>
         <td>
-          <% if attribute_value.is_a? String %>
-            <%= auto_link(attribute_value, :all, :target => "_blank") %>
+          <% if attributes[attribute].is_a? String %>
+            <%= auto_link(attributes[attribute], :all, :target => "_blank") %>
           <% else %>
-            <%= attribute_value %>
+            <%= attributes[attribute] %>
           <% end %>
         </td>
       </tr>
@@ -37,8 +41,10 @@
       <% @crunchbase_company.funding_rounds.each do |round| %>
         <p>
           <% round_name = round['round_code'] == "seed"  ?  round['round_code'].capitalize  :  "Series " + round['round_code'].capitalize %>
-          <% amount = round["raised_amount"].to_i > 1e6  ?  "#{round["raised_amount"].to_i / 1e6}M"  :  "#{round["raised_amount"].to_i / 1e3}K" %>
-          <strong><%= link_to "#{round_name}, #{round['funded_month']}/#{round['funded_year']} ", round['source_url'] %></strong><br>
+          <% amount = round["raised_amount"].to_i >= 1e6  ?  "#{round["raised_amount"].to_i / 1e6}M"  :  "#{round["raised_amount"].to_i / 1e3}K" %>
+          <% round_overview = link_to "#{round_name}, #{round['funded_month']}/#{round['funded_year']} ", round['source_url'], target: "_blank" %>
+          <% funding_round_text += round_overview + "\n" %>
+          <strong><%= round_overview %></strong><br>
           <strong><%= amount %> <%= round["raised_currency_code"] %></strong>
           <ul>
           <% round["investments"].each do |investment| %>
@@ -61,10 +67,34 @@
   <% end %>
   
   <% if @crunchbase_company.respond_to?("overview") %>
+  <% attributes[:overview] = @crunchbase_company.overview %>
   <tr>
     <td><strong>Overview</strong></td>
-    <td><%= simple_format @crunchbase_company.overview %></td>
+    <td><%= simple_format attributes[:overview] %></td>
   </tr>
   <% end %>
 <table>
+
+
+<%= simple_form_for @company, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name                 , as: :hidden   %>
+  <%= f.input :website              , as: :hidden, input_html: {value: attributes[:homepage_url]} %>
+  <%= f.input :crunchbase_url       , as: :hidden, input_html: {value: attributes[:crunchbase_url]} %>
+  <%= f.input :linkedin_url         , as: :hidden   %>
+  <%= f.input :glassdoor_url        , as: :hidden   %>
+  <%= f.input :twitter_username     , as: :hidden, input_html: {value: attributes[:twitter_username]} %>
+  <%= f.input :number_of_employees  , as: :hidden, input_html: {value: attributes[:number_of_employees]} %>
+  <%= f.input :founded_year         , as: :hidden, input_html: {value: attributes[:founded_year]} %>
+  <%= f.input :total_money_raised   , as: :hidden, input_html: {value: attributes[:total_money_raised]} %>
+  <%= f.input :funding_rounds       , as: :hidden, input_html: {value: funding_round_text} %>
+  <%= f.input :description          , as: :hidden, input_html: {value: attributes[:description]} %>
+  <%= f.input :overview             , as: :hidden, input_html: {value: attributes[:overview]} %>
+  <div class="form-actions">
+    <%= f.button :submit, "Update with Crunchbase Info", :class => 'btn-primary' %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_company_path(@company), :class => 'btn' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                @company, :class => 'btn' %>
+  </div>
+<% end %>
 
