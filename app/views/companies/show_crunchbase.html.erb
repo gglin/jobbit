@@ -3,4 +3,43 @@
   <h3><%=t '.title', :default => "#{@company.name} - Crunchbase" %></h3>
 </div>
 
+<%# @crunchbase_company.methods - Object.methods %>
 
+<table class="table">
+  <tr>
+    <td><strong>Twitter</strong></td>
+    <td><%= link_to "@#{@crunchbase_company.twitter_username}", "http://www.twitter.com/#{@crunchbase_company.twitter_username}" %></td>
+  </tr>
+
+  <% crunchbase_attributes.each do |attribute| %>
+    <% attribute_value = @crunchbase_company.send(attribute.to_s) %>
+    <% if attribute_value %>
+      <tr>
+        <td><strong><%= model_class.human_attribute_name(attribute) %>:</strong></td>
+        <td>
+          <% if attribute_value.is_a? String %>
+            <%= auto_link(attribute_value, :all, :target => "_blank") %>
+          <% else %>
+            <%= attribute_value %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+
+  <tr>
+    <td><strong>Funding Rounds</strong></td>
+    <td>
+      <% @crunchbase_company.funding_rounds.each do |round| %>
+        <p><%= link_to "Round: #{round['round_code']}", round['source_url'] %></p>
+        <%= round["raised_amount"].to_i / 1e6 %>M <%= round["raised_currency_code"] %>
+        <br><br>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><strong>Overview</strong></td>
+    <td><%= simple_format @crunchbase_company.overview %></td>
+  </tr>
+<table>

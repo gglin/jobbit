@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
 
-  before_filter :enter_api_keys
+  # before_filter :enter_api_keys
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

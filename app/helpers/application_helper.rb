@@ -1,8 +1,15 @@
 module ApplicationHelper
 
   def enter_api_keys
-    Crunchbase::API.key = ENV["CRUNCHBASE_KEY"]
+    enter_crunchbase_keys
+    enter_linkedin_keys
+  end
 
+  def enter_crunchbase_keys
+    Crunchbase::API.key = ENV["CRUNCHBASE_KEY"]
+  end
+
+  def enter_linkedin_keys
     LinkedIn.configure do |config|
       config.token  = ENV["LINKEDIN_KEY"]
       config.secret = ENV["LINKEDIN_SECRET"]

@@ -85,6 +85,10 @@ class CompaniesController < ApplicationController
 
   def show_crunchbase
     @company = Company.find(params[:id])
+    @name    = @company.name
+
+    enter_crunchbase_keys
+    @crunchbase_company = Crunchbase::Company.find(@name)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -94,6 +98,7 @@ class CompaniesController < ApplicationController
 
   def show_linkedin
     @company = Company.find(params[:id])
+    @name    = @company.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -103,6 +108,7 @@ class CompaniesController < ApplicationController
 
   def show_glassdoor
     @company = Company.find(params[:id])
+    @name    = @company.name
 
     respond_to do |format|
       format.html # show.html.erb
