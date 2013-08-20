@@ -31,12 +31,36 @@ module CompaniesHelper
       # :video_embeds,
       # :screenshots,
       # :external_links,
-      # :founded,
+      :founded,
       # :deadpooled,
       # :products,
       # :date_from_components,
       # :tags,
       # :aliases
+    ]
+  end
+
+  def linkedin_attributes
+    [
+      :id,
+      :name,
+      :"universal-name",
+      :"email-domains",
+      :"company-type",
+      :"website-url",
+      :industries,
+      :status,
+      :"logo-url",
+      :"square-logo-url",
+      :"blog-rss-url",
+      :"twitter-id",
+      :"employee-count-range",
+      :specialties,
+      :locations,
+      :description,
+      :"founded-year",
+      :"end-year",
+      :"num-followers"
     ]
   end
 

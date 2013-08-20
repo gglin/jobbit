@@ -23,7 +23,7 @@
 
   <tr>
     <td><strong><%= "Twitter Account" %>:</strong></td>
-    <td><%= link_to "@#{@company.twitter_username}", "http://www.twitter.com/#{@company.twitter_username}", :target => "_blank" %></td>
+    <td><%= link_to "@#{@company.twitter_username}", "http://www.twitter.com/#{@company.twitter_username}", :target => "_blank" unless @company.twitter_username.blank? %></td>
   </tr>
   <tr>
     <td><strong><%= "# of Employees" %>:</strong></td>
@@ -36,7 +36,7 @@
 
   <tr>
     <td><strong><%= model_class.human_attribute_name(:total_money_raised) %>:</strong></td>
-    <td><%= @company.total_money_raised %></td>
+    <td><%= "$#{@company.total_money_raised.to_f / 1e6}M" if @company.total_money_raised.to_f > 0 %></td>
   </tr>
   <tr>
     <td><strong><%= model_class.human_attribute_name(:funding_rounds) %>:</strong></td>
@@ -57,6 +57,16 @@
     <td><%= simple_format @company.notes %></td>
   </tr>
 </table>
+
+<div id="employees">
+  <hr>
+  <h4>Employees at Fair:</h4>
+  <ul>
+  <% @company.employees.each do |employee| %>
+    <li><%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee) %></li>
+  <% end %>
+  </ul>
+</div>
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),

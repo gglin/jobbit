@@ -1,7 +1,7 @@
 <%- model_class = Company -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-  <%= link_to "Update All from Crunchbase", "/", :class => 'btn btn-success btn-mini' %>
+  <%# link_to "Update All from Crunchbase", "/", :class => 'btn btn-success btn-mini' %>
 </div>
 <table class="table table-striped table-wide">
   <thead>
@@ -13,10 +13,10 @@
       <th data-sort="string"><%= model_class.human_attribute_name(:linkedin_url) %></th>
       <th data-sort="string"><%= model_class.human_attribute_name(:glassdoor_url) %></th>
       <th data-sort="string"><%= "Twitter Account" %></th>
-      <th data-sort="string"><%= "# of Employees" %></th>
+      <th data-sort="int"><%= "# of Employees" %></th>
       <th data-sort="string"><%= model_class.human_attribute_name(:founded_year) %></th>
-      <th data-sort="string"><%= "Total Money Raised" %></th>
-      <th data-sort="string"><%= "# Funding Rounds" %></th>
+      <th data-sort="int"><%= "Total Money Raised" %></th>
+      <th data-sort="int"><%= "# Funding Rounds" %></th>
       <th data-sort="string"><%= "Employees at Fair" %></th>
       <!-- <th><%# model_class.human_attribute_name(:overview) %></th> -->
       <!-- <th><%# model_class.human_attribute_name(:created_at) %></th> -->
@@ -33,13 +33,13 @@
         <td><%= link_to "<i class='icon-linkedin-sign icon-large'></i>".html_safe, company.linkedin_url, target: "_blank"      if company.linkedin_url && !company.linkedin_url.blank? %></td>
         <td><%= link_to image_tag("/assets/glassdoor_logo.jpeg", size: "16x16"), company.glassdoor_url, target: "_blank"       if company.glassdoor_url && !company.glassdoor_url.blank? %></td>
         <td><%= link_to "@#{company.twitter_username}", "http://www.twitter.com/#{company.twitter_username}", target: "_blank" if company.twitter_username && !company.twitter_username.blank? %></td>
-        <td><%= company.number_of_employees %></td>
+        <td data-sort-value="<%= company.number_of_employees.to_i %>"><%= company.number_of_employees %></td>
         <td><%= company.founded_year %></td>
-        <td><%= company.total_money_raised %></td>
+        <td data-sort-value="<%= company.total_money_raised.to_f %>"><%= "$#{company.total_money_raised.to_f / 1e6}M" if company.total_money_raised.to_f > 0 %></td>
         <td><%= company.funding_rounds.scan("<a").size if company.funding_rounds %></td>
         <td>
           <% if company.employees.size > 1 %>
-            <%= company.employees.size %>
+            <%= link_to company.employees.size, company_path(company) + "#employees" %>
           <% else %>
             <% employee = company.employees.first %>
             <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee) %>

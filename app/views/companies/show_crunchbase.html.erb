@@ -3,7 +3,11 @@
   <h3><%=t '.title', :default => "#{@company.name} - Crunchbase" %></h3>
 </div>
 
-<%# @crunchbase_company.methods - Object.methods %>
+<%# if @result %>
+  <%# @result.methods - Object.methods %>
+  <%# @result.namespace %>
+  <%# @result.entity.methods - Object.methods %>
+<%# end %>
 
 <% attributes = {} %>
 <% funding_round_text = "" %>
@@ -84,8 +88,8 @@
   <%= f.input :glassdoor_url        , as: :hidden   %>
   <%= f.input :twitter_username     , as: :hidden, input_html: {value: attributes[:twitter_username]} %>
   <%= f.input :number_of_employees  , as: :hidden, input_html: {value: attributes[:number_of_employees]} %>
-  <%= f.input :founded_year         , as: :hidden, input_html: {value: attributes[:founded_year]} %>
-  <%= f.input :total_money_raised   , as: :hidden, input_html: {value: attributes[:total_money_raised]} %>
+  <%= f.input :founded_year         , as: :hidden, input_html: {value: attributes[:founded]} %>
+  <%= f.input :total_money_raised   , as: :hidden, input_html: {value: money_to_num(attributes[:total_money_raised]) } %>
   <%= f.input :funding_rounds       , as: :hidden, input_html: {value: funding_round_text} %>
   <%= f.input :description          , as: :hidden, input_html: {value: attributes[:description]} %>
   <%= f.input :overview             , as: :hidden, input_html: {value: attributes[:overview]} %>

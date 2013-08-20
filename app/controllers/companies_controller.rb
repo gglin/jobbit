@@ -1,4 +1,7 @@
 class CompaniesController < ApplicationController
+
+  include CompaniesHelper
+
   # before_filter :authorize, only: [:edit, :update]
   
   # GET /companies
@@ -93,7 +96,12 @@ class CompaniesController < ApplicationController
       @company_found = true
     rescue
       # .select{|x| x.namespace != "person"}
-      @crunchbase_company = Crunchbase::Search.find(@name).first
+      @result = Crunchbase::Search.find(@name).first
+      if @result && (@result.namespace == "company" || @result.namespace == "financial-organization")
+        @crunchbase_company = @result.entity
+      else
+        @crunchbase_company = @result
+      end
     end
 
     respond_to do |format|
@@ -105,6 +113,15 @@ class CompaniesController < ApplicationController
   def show_linkedin
     @company = Company.find(params[:id])
     @name    = @company.name
+
+    enter_linkedin_keys
+    begin
+      fields = [{:companies => linkedin_attributes}, :num_results]
+      results = @client.search({:keywords => @name, :fields => fields}, 'company')
+      @company_hash = results.companies.all.first.to_hash
+    rescue
+      @company_hash = {}
+    end
 
     respond_to do |format|
       format.html # show.html.erb

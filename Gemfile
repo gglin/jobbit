@@ -51,6 +51,7 @@ gem 'figaro'
 # gem 'fastercsv'
 
 gem 'rinku', :require => 'rails_rinku'
+gem 'mechanize'
 
 
 gem 'omniauth'
