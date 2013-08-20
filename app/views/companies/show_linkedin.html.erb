@@ -3,4 +3,100 @@
   <h3><%=t '.title', :default => "#{@company.name} - LinkedIn" %></h3>
 </div>
 
-<%= @company_hash %>
+<% @company_hash %>
+<% attributes = {} %>
+
+<% unless @company_hash.empty? %>
+<table class="table table-show">
+  <% attributes[:linkedin_url]        = "http://www.linkedin.com/company/#{@company_hash['id']}" %>
+  <% attributes[:website]             = @company_hash["website_url"] %>
+  <% attributes[:twitter_username]    = @company_hash["twitter_id"] %>
+  <% attributes[:number_of_employees] = @company_hash["employee_count_range"]["name"] if @company_hash["employee_count_range"] %>
+  <% attributes[:founded_year]        = @company_hash["founded_year"] %>
+  <% attributes[:industries]          = @company_hash["industries"]["all"].map{|i| i["name"]} if @company_hash["industries"] %>
+  <% attributes[:num_followers]       = @company_hash["num_followers"] %>
+  <% attributes[:overview]            = @company_hash["description"] %>
+
+  <tr>
+    <td><strong>LinkedIn URL</strong></td>
+    <td><%= auto_link(attributes[:linkedin_url], :all, :target => "_blank") %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Homepage URL</strong></td>
+    <td><%= auto_link(attributes[:website], :all, :target => "_blank") %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Twitter</strong></td>
+    <td><%= link_to "#{attributes[:twitter_username]}", "http://www.twitter.com/#{attributes[:twitter_username]}" %></td>
+  </tr>
+
+  <tr>
+    <td><strong># of Employees</strong></td>
+    <td><%= attributes[:number_of_employees] %></td>
+  </tr>
+
+  <tr>
+    <td><strong># of LinkedIn Followers</strong></td>
+    <td><%= attributes[:num_followers] %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Founded Year</strong></td>
+    <td><%= attributes[:founded_year] %></td>
+  </tr>
+
+  <tr>
+    <td><strong>Industries</strong></td>
+    <td>
+      <ul>
+      <% if attributes[:industries] %>
+        <% attributes[:industries].each do |industry| %>
+          <li><%= industry %></li>
+        <% end %>
+      <% end %>
+      </ul>
+    </td>
+  </tr>
+
+  <tr>
+    <td><strong>Overview</strong></td>
+    <td><%= auto_link(simple_format(attributes[:overview]), :all, :target => "_blank") %></td>
+  </tr>
+
+<table>
+<% end %>
+
+<%= simple_form_for @company, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :website              ,  input_html: {value: attributes[:website]} if f.object.website.nil? || f.object.website.empty? %>
+  <%= f.input :linkedin_url         ,  input_html: {value: attributes[:linkedin_url]} if f.object.linkedin_url.nil? || f.object.linkedin_url.empty?  %>
+  <%= f.input :twitter_username     ,  input_html: {value: attributes[:twitter_username]} if f.object.twitter_username.nil? || f.object.twitter_username.empty? %>
+  <%= f.input :number_of_employees  ,  input_html: {value: attributes[:number_of_employees]} if f.object.number_of_employees.nil? || f.object.number_of_employees.empty? %>
+  <%= f.input :num_followers        ,  input_html: {value: attributes[:num_followers]} if f.object.num_followers.nil? || f.object.num_followers == 0 %>
+  <%= f.input :founded_year         ,  input_html: {value: attributes[:founded_year]} if f.object.founded_year.nil? || f.object.founded_year.empty?%>
+  <%= f.input :industries           ,  input_html: {value: attributes[:industries]} if f.object.industries.nil? || f.object.industries.empty? %>
+  <%= f.input :overview             ,  input_html: {value: attributes[:overview]} if f.object.overview.nil? || f.object.overview.empty? %>
+  <div class="form-actions">
+    <%= f.button :submit, "Update with LinkedIn Info (without override)", :class => 'btn-primary' %>
+  </div>
+<% end %>
+
+
+<%= simple_form_for @company, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :website              , as: :hidden, input_html: {value: attributes[:website]} %>
+  <%= f.input :linkedin_url         , as: :hidden, input_html: {value: attributes[:linkedin_url]}   %>
+  <%= f.input :twitter_username     , as: :hidden, input_html: {value: attributes[:twitter_username]} %>
+  <%= f.input :number_of_employees  , as: :hidden, input_html: {value: attributes[:number_of_employees]} %>
+  <%= f.input :num_followers        , as: :hidden, input_html: {value: attributes[:num_followers]} %>
+  <%= f.input :founded_year         , as: :hidden, input_html: {value: attributes[:founded_year]} %>
+  <%= f.input :industries           , as: :hidden, input_html: {value: attributes[:industries]} %>
+  <%= f.input :overview             , as: :hidden, input_html: {value: attributes[:overview]} %>
+  <div class="form-actions">
+    <%= f.button :submit, "Update with LinkedIn Info (with override)", :class => 'btn-primary' %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_company_path(@company), :class => 'btn' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                @company, :class => 'btn' %>
+  </div>
+<% end %>

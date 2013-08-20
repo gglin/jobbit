@@ -14,9 +14,11 @@
       <th data-sort="string"><%= model_class.human_attribute_name(:glassdoor_url) %></th>
       <th data-sort="string"><%= "Twitter Account" %></th>
       <th data-sort="int"><%= "# of Employees" %></th>
+      <th data-sort="int"><%= "# of LinkedIn Followers" %></th>
       <th data-sort="string"><%= model_class.human_attribute_name(:founded_year) %></th>
       <th data-sort="int"><%= "Total Money Raised" %></th>
       <th data-sort="int"><%= "# Funding Rounds" %></th>
+      <th data-sort="string"><%= "Industries" %></th>
       <th data-sort="string"><%= "Employees at Fair" %></th>
       <!-- <th><%# model_class.human_attribute_name(:overview) %></th> -->
       <!-- <th><%# model_class.human_attribute_name(:created_at) %></th> -->
@@ -34,9 +36,20 @@
         <td><%= link_to image_tag("/assets/glassdoor_logo.jpeg", size: "16x16"), company.glassdoor_url, target: "_blank"       if company.glassdoor_url && !company.glassdoor_url.blank? %></td>
         <td><%= link_to "@#{company.twitter_username}", "http://www.twitter.com/#{company.twitter_username}", target: "_blank" if company.twitter_username && !company.twitter_username.blank? %></td>
         <td data-sort-value="<%= company.number_of_employees.to_i %>"><%= company.number_of_employees %></td>
+        <td data-sort-value="<%= company.num_followers %>"><%= company.num_followers %></td>
         <td><%= company.founded_year %></td>
         <td data-sort-value="<%= company.total_money_raised.to_f %>"><%= "$#{company.total_money_raised.to_f / 1e6}M" if company.total_money_raised.to_f > 0 %></td>
         <td><%= company.funding_rounds.scan("<a").size if company.funding_rounds %></td>
+        <td>
+          <ul class="unbulleted">
+          <% if !company.industries.nil? && !company.industries[1..-2].nil? %>
+            <% industries = company.industries[1..-2].split(",").map {|e| e[1..-2]} %>
+            <% industries.each do |industry| %>
+              <li><%= industry %></li>
+            <% end %>
+          <% end %>
+          </ul>
+        </td>
         <td>
           <% if company.employees.size > 1 %>
             <%= link_to company.employees.size, company_path(company) + "#employees" %>

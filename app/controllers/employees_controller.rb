@@ -1,4 +1,7 @@
 class EmployeesController < ApplicationController
+
+  before_filter :authorize, except: [:index, :show]
+  
   # GET /employees
   # GET /employees.json
   def index

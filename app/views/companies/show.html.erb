@@ -25,10 +25,17 @@
     <td><strong><%= "Twitter Account" %>:</strong></td>
     <td><%= link_to "@#{@company.twitter_username}", "http://www.twitter.com/#{@company.twitter_username}", :target => "_blank" unless @company.twitter_username.blank? %></td>
   </tr>
+
   <tr>
     <td><strong><%= "# of Employees" %>:</strong></td>
     <td><%= @company.number_of_employees %></td>
   </tr>
+
+  <tr>
+    <td><strong><%= "# of LinkedIn Followers" %>:</strong></td>
+    <td><%= @company.num_followers %></td>
+  </tr>
+
   <tr>
     <td><strong><%= model_class.human_attribute_name(:founded_year) %>:</strong></td>
     <td><%= @company.founded_year %></td>
@@ -41,6 +48,20 @@
   <tr>
     <td><strong><%= model_class.human_attribute_name(:funding_rounds) %>:</strong></td>
     <td><%= simple_format @company.funding_rounds %></td>
+  </tr>
+
+  <tr>
+    <td><strong><%= model_class.human_attribute_name(:industries) %>:</strong></td>
+    <td>
+      <ul>
+      <% if !@company.industries.nil? && !@company.industries[1..-2].nil? %>
+        <% industries = @company.industries[1..-2].split(",").map {|e| e[1..-2]} %>
+        <% industries.each do |industry| %>
+          <li><%= industry %></li>
+        <% end %>
+      <% end %>
+      </ul>
+    </td>
   </tr>
   
   <tr>

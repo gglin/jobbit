@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819060332) do
+ActiveRecord::Schema.define(:version => 20130820054508) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(:version => 20130819060332) do
     t.integer  "avg_glassdoor_rating"
     t.integer  "num_glassdoor_ratings"
     t.text     "notes"
+    t.integer  "num_followers"
+    t.string   "industries"
   end
 
   create_table "employees", :force => true do |t|

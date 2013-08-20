@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
 
   include CompaniesHelper
 
-  # before_filter :authorize, only: [:edit, :update]
+  before_filter :authorize, except: [:index, :show]
   
   # GET /companies
   # GET /companies.json
@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
     @companies = Company.order("LOWER(name)")
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :layout => "application_fluid" }
       format.json { render json: @companies }
     end
   end

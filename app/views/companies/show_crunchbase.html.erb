@@ -12,7 +12,7 @@
 <% attributes = {} %>
 <% funding_round_text = "" %>
 
-<table class="table">
+<table class="table table-show">
   <% if @crunchbase_company.respond_to?("twitter_username") %>
   <% attributes[:twitter_username] = @crunchbase_company.twitter_username %>
   <tr>
