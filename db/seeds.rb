@@ -29,7 +29,7 @@ CSV.foreach(filename) do |row|
 
     employee = company.employees.create(first_name: first_name, last_name: last_name)
     puts "#{employee.first_name} #{employee.last_name}"
-    
+
     if job_title
       employment = Employment.where(employee_id: employee.id, company_id: company.id).first
       employment.title = job_title

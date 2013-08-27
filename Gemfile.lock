@@ -48,8 +48,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    columnize (0.3.6)
     commonjs (0.2.6)
     crunchbase (0.3.0)
+    debugger (1.6.1)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.3)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     domain_name (0.5.13)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -199,6 +206,7 @@ DEPENDENCIES
   capistrano
   coffee-rails (~> 3.2.1)
   crunchbase
+  debugger
   figaro
   jquery-rails
   less-rails

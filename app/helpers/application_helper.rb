@@ -20,8 +20,9 @@ module ApplicationHelper
     # rtoken  = client.request_token.token
     # rsecret = client.request_token.secret
     # client.authorize_from_request(rtoken, rsecret, 79550)
-    
+
     @client.authorize_from_access(ENV["LINKEDIN_OAUTH_TOKEN"], ENV["LINKEDIN_OAUTH_SECRET"])
+    # debugger
   end
 
   def money_to_num(money_str)
