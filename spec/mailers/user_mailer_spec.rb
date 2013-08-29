@@ -18,5 +18,4 @@ describe UserMailer do
       mail.body.encoded.should match(edit_password_reset_path(user.password_reset_token))
     end
   end
-
 end

@@ -16,7 +16,7 @@ describe User do
       user.reload.password_reset_sent_at.should be_present
     end
 
-    # sometimes this fails - why??
+    # this fails when we configure the test env actionmailer settings for gmail smtp
     it "delivers email to user" do
       user.send_password_reset
       last_email.to.should include (user.email)

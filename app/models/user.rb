@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :password_confirmation, :name, :twitter, :linkedin
 
-  # validates_uniqueness_of :email
+  validates_uniqueness_of :email
 
   # def self.from_omniauth(auth)
   #   where(auth.slice("provider", "uid")).first || create_from_omniauth(auth)
