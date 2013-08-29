@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  describe "#send_password_reset" do
+  context "#send_password_reset" do
     let(:user) { FactoryGirl.create(:user) }
 
     it "generates a unique password_reset_token each time" do
@@ -19,7 +19,7 @@ describe User do
     # this fails when we configure the test env actionmailer settings for gmail smtp
     it "delivers email to user" do
       user.send_password_reset
-      last_email.to.should include (user.email)
+      last_email.to.should include(user.email)
     end
   end
 end
