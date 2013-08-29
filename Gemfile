@@ -38,6 +38,8 @@ group :development, :test do
   # gem 'nsnotify'
   # gem 'terminal-notifier'
   gem 'terminal-notifier-guard'
+  gem 'spork-rails'
+  gem 'guard-spork'
 end
 
 gem 'jquery-rails'
@@ -60,7 +62,7 @@ gem 'debugger'
 gem 'simple_form'
 gem 'figaro'
 # gem 'devise'
- 
+
 # gem 'fastercsv'
 
 gem 'rinku', :require => 'rails_rinku'

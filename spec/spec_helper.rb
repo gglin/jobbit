@@ -43,4 +43,7 @@ RSpec.configure do |config|
 
   config.include MailerMacros
   config.before(:each) { reset_email }
+
+  # config.include SessionMacros
+  # config.before(:each) { login_user }
 end

@@ -5,5 +5,6 @@ class Company < ActiveRecord::Base
   has_many :employments
   has_many :employees, through: :employments
 
+  validates :name, presence: true
   validates_uniqueness_of :name, :case_sensitive => false
 end

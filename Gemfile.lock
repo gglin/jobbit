@@ -46,6 +46,8 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -90,6 +92,10 @@ GEM
     guard-rspec (3.0.2)
       guard (>= 1.8)
       rspec (~> 2.13)
+    guard-spork (1.5.1)
+      childprocess (>= 0.2.3)
+      guard (>= 1.1)
+      spork (>= 0.8.4)
     hashie (2.0.5)
     highline (1.6.19)
     hike (1.2.3)
@@ -219,6 +225,10 @@ GEM
       activemodel (~> 3.0)
     simple_oauth (0.2.0)
     slop (3.4.6)
+    spork (1.0.0rc3)
+    spork-rails (3.2.1)
+      rails (>= 3.0.0, < 3.3.0)
+      spork (>= 1.0rc0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -268,6 +278,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   guard-rspec
+  guard-spork
   jquery-rails
   less-rails
   linkedin
@@ -281,6 +292,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   simple_form
+  spork-rails
   sqlite3
   terminal-notifier-guard
   therubyracer
