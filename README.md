@@ -15,8 +15,9 @@ Seeding:
 1. rake db:seed
 2. rake import_company:crunchbase   => *This will autopopulate all companies with Crunchbase data*
 3. rake import_company:linkedin   => *This will autopopulate from LinkedIn, without overriding existing data*
-  *A few companies may not be seeded correctly due to the inexact nature of searching LinkedIn*
-  *Manual edits may be required*
+
+*A few companies may not be seeded correctly due to the inexact nature of searching LinkedIn*
+*Manual edits may be required*
 
 Testing:
 
