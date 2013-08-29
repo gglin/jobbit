@@ -9,6 +9,8 @@
 require 'csv'
 
 sciencefair = "db/sciencefair_attendees.csv"
+
+# Taken from http://www.slideshare.net/andrekonig/the-nyc-startup-scene-24356781
 nycstartups = "db/NYC_startups.csv"
 
 Company.delete_all
@@ -26,7 +28,7 @@ CSV.foreach(sciencefair) do |row|
     puts company.name + "\n"
 
     employee = company.employees.create(first_name: first_name, last_name: last_name)
-    puts "#{employee.first_name} #{employee.last_name}"
+    puts "   #{employee.first_name} #{employee.last_name}"
 
     if job_title
       employment = Employment.where(employee_id: employee.id, company_id: company.id).first
@@ -37,15 +39,16 @@ CSV.foreach(sciencefair) do |row|
 end
 
 CSV.foreach(nycstartups) do |row|
-  industry = ""
-  if row[0][0..2] == "## "
-    industry = row[0][3..-1]
-    puts "[\"#{industry}\"]"
-  elsif row[0] != ""
+  if row[0].nil? || row[0].empty?
+    puts
+  elsif row[0][0..2] == "## "
+    @industry = row[0][3..-1]
+    puts "[\"#{@industry}\"]"
+  else
     company_name = row[0]
 
     company = Company.find_or_create_by_name(company_name)
-    company.industries = "[\"#{industry}\"]"
+    company.industries = "[\"#{@industry}\"]"
     company.save!
     puts company.name + "\n"
   end

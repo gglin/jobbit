@@ -20,7 +20,7 @@
     <td><%= link_to "@#{attributes[:twitter_username]}", "http://www.twitter.com/#{attributes[:twitter_username]}" %></td>
   </tr>
   <% end %>
-  
+
   <% crunchbase_attributes.each do |attribute| %>
     <% if @crunchbase_company.respond_to?(attribute.to_s) && @crunchbase_company.send(attribute.to_s) %>
       <% attributes[attribute] = @crunchbase_company.send(attribute.to_s) %>
@@ -36,7 +36,7 @@
       </tr>
     <% end %>
   <% end %>
-  
+
   <% if @crunchbase_company.respond_to?("funding_rounds") %>
   <tr>
     <td><strong>Funding Rounds</strong></td>
@@ -69,7 +69,7 @@
     </td>
   </tr>
   <% end %>
-  
+
   <% if @crunchbase_company.respond_to?("overview") %>
   <% attributes[:overview] = @crunchbase_company.overview %>
   <tr>

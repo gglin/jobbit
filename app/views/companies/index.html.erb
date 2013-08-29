@@ -1,6 +1,7 @@
 <%- model_class = Company -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h4>Total Count: <%= @companies.size %></h4>
   <%# link_to "Update All from Crunchbase", "/", :class => 'btn btn-success btn-mini' %>
 </div>
 <table class="table table-striped table-hover table-wide">
@@ -29,7 +30,7 @@
     <% @companies.each do |company| %>
       <tr>
         <!-- <td><%# link_to company.id, company_path(company) %></td> -->
-        <td><%= link_to company.name, company_path(company) %></td>
+        <td data-sort-value="<%= company.name.downcase %>"><%= link_to company.name, company_path(company) %></td>
         <td><%= link_to "<i class='icon-external-link-sign icon-large'></i>".html_safe, company.website, target: "_blank"                    if company.website && !company.website.blank? %></td>
         <td><%= link_to image_tag("/assets/crunchbase_logo.jpeg", size: "16x16"), company.crunchbase_url, target: "_blank"     if company.crunchbase_url && !company.crunchbase_url.blank? %></td>
         <td><%= link_to "<i class='icon-linkedin-sign icon-large'></i>".html_safe, company.linkedin_url, target: "_blank"      if company.linkedin_url && !company.linkedin_url.blank? %></td>
@@ -53,7 +54,7 @@
         <td>
           <% if company.employees.size > 1 %>
             <%= link_to company.employees.size, company_path(company) + "#employees" %>
-          <% else %>
+          <% elsif company.employees.size == 1 %>
             <% employee = company.employees.first %>
             <%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee) %>
           <% end %>
