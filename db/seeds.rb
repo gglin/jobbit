@@ -22,11 +22,8 @@ CSV.foreach(sciencefair) do |row|
     company_name = row[2]
     job_title    = row[3]
 
-    # employee = Employee.new(first_name: first_name, last_name: last_name)
-    # employee.save
-
     company = Company.find_or_create_by_name(company_name)
-    puts company.name
+    puts company.name + "\n"
 
     employee = company.employees.create(first_name: first_name, last_name: last_name)
     puts "#{employee.first_name} #{employee.last_name}"
@@ -36,7 +33,20 @@ CSV.foreach(sciencefair) do |row|
       employment.title = job_title
       employment.save
     end
+  end
+end
 
-    puts
+CSV.foreach(nycstartups) do |row|
+  industry = ""
+  if row[0][0..2] == "## "
+    industry = row[0][3..-1]
+    puts "[\"#{industry}\"]"
+  elsif row[0] != ""
+    company_name = row[0]
+
+    company = Company.find_or_create_by_name(company_name)
+    company.industries = "[\"#{industry}\"]"
+    company.save!
+    puts company.name + "\n"
   end
 end
