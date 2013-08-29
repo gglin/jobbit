@@ -2,7 +2,7 @@ class CompaniesController < ApplicationController
 
   include CompaniesHelper
 
-  # before_filter :authorize, except: [:index, :show]
+  before_filter :authorize, except: [:index, :show]
 
   # GET /companies
   # GET /companies.json

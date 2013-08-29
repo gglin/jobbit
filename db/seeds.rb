@@ -17,26 +17,26 @@ Company.delete_all
 Employee.delete_all
 Employment.delete_all
 
-CSV.foreach(sciencefair) do |row|
-  unless row[0] == "First Name"
-    first_name   = row[0]
-    last_name    = row[1]
-    company_name = row[2]
-    job_title    = row[3]
+# CSV.foreach(sciencefair) do |row|
+#   unless row[0] == "First Name"
+#     first_name   = row[0]
+#     last_name    = row[1]
+#     company_name = row[2]
+#     job_title    = row[3]
 
-    company = Company.find_or_create_by_name(company_name)
-    puts company.name + "\n"
+#     company = Company.find_or_create_by_name(company_name)
+#     puts company.name + "\n"
 
-    employee = company.employees.create(first_name: first_name, last_name: last_name)
-    puts "   #{employee.first_name} #{employee.last_name}"
+#     employee = company.employees.create(first_name: first_name, last_name: last_name)
+#     puts "   #{employee.first_name} #{employee.last_name}"
 
-    if job_title
-      employment = Employment.where(employee_id: employee.id, company_id: company.id).first
-      employment.title = job_title
-      employment.save
-    end
-  end
-end
+#     if job_title
+#       employment = Employment.where(employee_id: employee.id, company_id: company.id).first
+#       employment.title = job_title
+#       employment.save
+#     end
+#   end
+# end
 
 CSV.foreach(nycstartups) do |row|
   if row[0].nil? || row[0].empty?
