@@ -81,7 +81,7 @@
 
 <div id="employees">
   <hr>
-  <h4>Employees at Fair:</h4>
+  <h4>Employees:</h4>
   <ul>
   <% @company.employees.each do |employee| %>
     <li><%= link_to "#{employee.first_name} #{employee.last_name}", employee_path(employee) %></li>
