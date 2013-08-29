@@ -21,7 +21,7 @@
     <% @employees.each do |employee| %>
       <tr>
         <% company = employee.companies.first %>
-        <% title = Employment.where(company_id: company.id, employee_id: employee.id).first.title %>
+        <% title = employee.employments.first.title %>
         <!-- <td><%# link_to employee.id, employee_path(employee) %></td> -->
         <td><%= link_to employee.first_name, employee_path(employee) %></td>
         <td><%= link_to employee.last_name,  employee_path(employee) %></td>

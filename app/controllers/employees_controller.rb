@@ -5,7 +5,8 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.order("last_name, first_name")
+    @employees = Employee.joins(:employments).includes(:companies).order("last_name, first_name")
+    # @employments = Employment.includes(:employees)
 
     respond_to do |format|
       format.html # index.html.erb

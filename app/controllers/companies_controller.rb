@@ -7,7 +7,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.order("LOWER(name)")
+    @companies = Company.includes(:employees).order("LOWER(name)")
 
     respond_to do |format|
       format.html { render :layout => "application_fluid" }

@@ -1,6 +1,6 @@
 <h1>Sign Up</h1>
 
-<%= simple_form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+<%= simple_form_for @user, :html => {  } do |f| %>
   <% if @user.errors.any? %>
     <div class="error_messages">
       <h2>Form is invalid</h2>
@@ -12,9 +12,9 @@
     </div>
   <% end %>
 
-  <%= f.input :email  %><br />
-  <%= f.input :password  %><br />
-  <%= f.input :password_confirmation  %><br />
+  <%= f.input :email  %>
+  <%= f.input :password  %>
+  <%= f.input :password_confirmation  %>
 
   <div class="actions">
     <%= f.submit "Sign Up", :class => 'btn btn-primary' %>
