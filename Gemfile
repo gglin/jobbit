@@ -28,10 +28,16 @@ group :assets do
 end
 
 gem "rspec-rails", :group => [:test, :development]
-group :test do
-  gem "factory_girl_rails"
-  gem "capybara"
-  gem "guard-rspec"
+group :development, :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'rb-fsevent'
+  # gem 'growl'
+  # gem 'ruby_gntp'
+  # gem 'nsnotify'
+  # gem 'terminal-notifier'
+  gem 'terminal-notifier-guard'
 end
 
 gem 'jquery-rails'
