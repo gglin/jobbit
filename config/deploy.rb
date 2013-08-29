@@ -28,7 +28,7 @@ namespace :deploy do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  task :symlink_config, :roles => :app do 
+  task :symlink_config, :roles => :app do
     run "ln -nfs #{shared_path}/config/application.yml #{current_release}/config/application.yml"
   end
 end
