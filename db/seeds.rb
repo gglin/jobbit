@@ -8,13 +8,14 @@
 
 require 'csv'
 
-filename = "db/sciencefair_attendees.csv"
+sciencefair = "db/sciencefair_attendees.csv"
+nycstartups = "db/NYC_startups.csv"
 
 Company.delete_all
 Employee.delete_all
 Employment.delete_all
 
-CSV.foreach(filename) do |row|
+CSV.foreach(sciencefair) do |row|
   unless row[0] == "First Name"
     first_name   = row[0]
     last_name    = row[1]
