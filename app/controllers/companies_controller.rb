@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
   include CompaniesHelper
 
   before_filter :authorize, except: [:index, :show]
-  
+
   # GET /companies
   # GET /companies.json
   def index
@@ -91,7 +91,7 @@ class CompaniesController < ApplicationController
     @name    = @company.name
 
     enter_crunchbase_keys
-    begin 
+    begin
       @crunchbase_company = Crunchbase::Company.find(@name)
       @company_found = true
     rescue

@@ -1,5 +1,7 @@
 Jobbit::Application.routes.draw do
 
+  # get "password_resets/new"
+
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
@@ -10,6 +12,7 @@ Jobbit::Application.routes.draw do
 
   resources :users
   resources :sessions
+  resources :password_resets
 
   resources :companies
   get 'companies/:id/crunchbase', to: 'companies#show_crunchbase', as: 'company_crunchbase'
